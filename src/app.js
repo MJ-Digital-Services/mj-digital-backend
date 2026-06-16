@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Health check
 app.get('/api/v1/health', (req, res) => {
-  res.json({ success: true, message: 'MJ Digital API running' });
+  res.json({ success: true, message: 'MJ Digital API running...' });
 });
 
 app.use('/api/v1/auth', authRoutes);
