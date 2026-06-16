@@ -63,7 +63,7 @@ export const getBlogBySlug = async (slug) => {
     .populate('category', 'name slug')
     .populate({
       path: 'relatedPosts',
-      select: 'title slug',
+      select: 'title slug coverImage',
       match: { isPublished: true },
     })
     .lean();
@@ -74,7 +74,13 @@ export const getBlogBySlug = async (slug) => {
     throw error;
   }
 
-  return { ...blog, coverImage: getPublicUrl(blog.coverImage) };
+  return {
+    ...blog,
+    coverImage: getPublicUrl(blog.coverImage),
+    relatedPosts: (blog.relatedPosts || [])
+      .filter(Boolean)
+      .map((p) => ({ ...p, coverImage: getPublicUrl(p.coverImage) })),
+  };
 };
 
 export const getBlogById = async (blogId) => {
