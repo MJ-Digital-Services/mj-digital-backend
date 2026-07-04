@@ -9,6 +9,7 @@ import categoryRoutes from './routes/category.routes.js';
 import contentRoutes from './routes/content.routes.js';
 import { protect } from './middlewares/auth.js';
 import { restrictTo } from './middlewares/auth.js';
+import newsRoutes from './routes/news.routes.js';
 
 const app = express();
 
@@ -28,9 +29,11 @@ app.get('/api/v1/health', (req, res) => {
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/blogs', blogRoutes);
+app.use('/api/v1/news', newsRoutes);
 app.use('/api/v1/categories', categoryRoutes);
 app.use('/api/v1/admin/content', contentRoutes);
 app.use('/api/v1/admin/blogs', blogRoutes);
+app.use('/api/v1/admin/news', newsRoutes);
 app.use('/api/v1/admin/categories', categoryRoutes);
 
 app.use(errorHandler);

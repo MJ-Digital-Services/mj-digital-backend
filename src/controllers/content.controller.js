@@ -36,3 +36,21 @@ export const uploadBlogPdf = asyncHandler(async (req, res) => {
     data: { pdfUrl: publicUrl, key },
   });
 });
+
+export const uploadNewsImage = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ success: false, message: 'No image file provided' });
+  }
+
+  const { key, publicUrl } = await s3Service.uploadFile(
+    req.file.buffer,
+    req.file.originalname,
+    req.file.mimetype,
+    'news/images'
+  );
+
+  res.status(200).json({
+    success: true,
+    data: { imageUrl: publicUrl, key },
+  });
+});
