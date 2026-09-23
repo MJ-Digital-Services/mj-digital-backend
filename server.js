@@ -1,8 +1,10 @@
 import app from './src/app.js';
 import { config } from './src/config/environment.js';
 import { connectDB } from './src/config/database.js';
+import { startCmsScheduledPublishCron } from './src/jobs/triggerCmsScheduledPublish.job.js';
 
 connectDB();
+startCmsScheduledPublishCron();
 
 const server = app.listen(config.port, () => {
   console.log(`🚀 MJ Digital API running on port ${config.port}`);

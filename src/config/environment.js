@@ -14,4 +14,13 @@ export const config = {
     bucketName: process.env.R2_BUCKET_NAME || 'mj-digital-media',
     publicUrl: process.env.R2_PUBLIC_URL,
   },
+  cms: {
+    // mj-digital-cms (Payload) — pinged every 5 minutes to drive its
+    // scheduled-publish job queue, since it runs on Vercel's serverless
+    // runtime with no persistent process of its own. See
+    // src/jobs/triggerCmsScheduledPublish.job.js and mj-digital-cms's
+    // CLAUDE.md "Scheduled Publishing".
+    url: process.env.CMS_URL || 'https://cms.mjdigitalservices.com',
+    cronSecret: process.env.CMS_CRON_SECRET,
+  },
 };
